@@ -18,6 +18,11 @@ Sadece **HTML5**, **CSS3** ve **JavaScript** kullanılarak geliştirilmiştir; a
 
 ---
 
+
+![image](https://github.com/user-attachments/assets/cb66e581-4b13-4af7-9b1c-9df57e7c0177)
+![image](https://github.com/user-attachments/assets/8e1fcb00-e0dc-4696-b4f2-1c8a0c978f52)
+
+
 ## ✨ Özellikler
 - 📱 **Responsive Tasarım:** Mobil & masaüstünde kusursuz uyum  
 - 🎨 **Modern UI:** Temiz, kurumsal renk paleti ve tipografi  
