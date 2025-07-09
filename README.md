@@ -31,5 +31,5 @@ Sadece **HTML5**, **CSS3** ve **JavaScript** kullanılarak geliştirilmiştir; a
 ## 📥 Kurulum & Çalıştırma
 1. Depoyu klonla  
    ```bash
-   git clone https://github.com/kullaniciAdi/diyetisyen-websitesi.git
+   [git clone https://github.com/kullaniciAdi/diyetisyen-websitesi.git](https://github.com/aLoneThirts/Diyetisyen-Website/tree/main)
    cd diyetisyen-websitesi
