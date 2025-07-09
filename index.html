@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dyt. Büşra Yıldırım Erdem | Beslenme Uzmanı</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><radialGradient id="a" cx="50%" cy="0%" r="100%"><stop offset="0%" stop-color="rgba(255,255,255,0.1)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></radialGradient></defs><rect width="100" height="20" fill="url(%23a)"/></svg>') repeat-x;
+            opacity: 0.3;
+        }
+
+       .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled .logo {
+            color: #333;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .navbar.scrolled .nav-menu a {
+            color: #333;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .navbar.scrolled .nav-menu a:hover,
+        .navbar.scrolled .nav-menu a.active {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+
+        .hero {
+            padding: 2rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            margin-top: 80px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.3s forwards;
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.6s forwards;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about {
+            background: #f8f9fa;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-text h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .service-card h3 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            text-align: right;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: #f8f9fa;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            padding: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: #667eea;
+            margin-right: 1rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Footer */
+     .footer {
+  background: var(--footer-bg);
+  backdrop-filter: blur(12px);
+  color: var(--footer-text);
+  padding: 4rem 2rem;
+    background: #000 !important;
+  color: #fff;        /* Metni beyaz tutmak için */
+  box-shadow: none;   /* Gölge varsa kaldırmak için */
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+}
+
+.footer-about h3 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.footer-about h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -0.25rem;
+  width: 3rem;
+  height: 0.2rem;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.footer-about p {
+  line-height: 1.6;
+}
+
+.footer-social {
+  display: flex;
+  align-items: center;
+}
+
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-right: 0.75rem;
+  border: 1px solid var(--footer-text);
+  border-radius: 50%;
+  color: var(--footer-text);
+  font-size: 1.1rem;
+  transition: background var(--transition), color var(--transition), transform var(--transition);
+}
+
+.footer-social a:last-child {
+  margin-right: 0;
+}
+
+.footer-social a:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.footer-contact p {
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.footer-contact a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.footer-contact a:hover {
+  color: var(--accent);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 1.5rem;
+  text-align: center;
+}
+
+.footer-bottom p {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero {
+                padding: 2rem 1rem;
+            }
+        }
+
+        /* Scroll Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            z-index: 1000;
+            transition: width 0.1s ease;
+        }
+/* ===== Info Section ===== */
+.info {
+  padding: 4rem 2rem;
+  background: #fff;
+}
+
+.info .section-title h2 {
+  color: #667eea;
+}
+
+.info-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 2rem auto 0;
+}
+
+@media (min-width: 768px) {
+  .info-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
+  .info-cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.info-card {
+  background: #f5f8ff;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.info-card h4 {
+  margin-bottom: 0.75rem;
+  color: #333;
+}
+
+.info-card p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">Dyt.Büşra Yıldırım Erdem</div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Ana Sayfa</a></li>
+                    <li><a href="about.html">Hakkımda</a></li>
+                    <li><a href="services.html">Hizmetler</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">İletişim</a></li>
+                </ul>
+            </div>
+        </nav>
+        
+        <div class="hero" id="home">
+            <h1>Dyt. Büşra Yıldırım Erdem</h1>
+            <p class="hero-subtitle">Beslenme Uzmanı & Yaşam Koçu</p>
+            <div class="quote">
+                "Söz konusu kendiniz olduğunda, değişimin bir parçası olamazsınız. Değişimin kendisi olmalısınız."
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="section about" id="about">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Merhaba!</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-image fade-in">
+                    <img src="/resimler/WhatsApp Görsel 2025-06-27 saat 13.08.58_30c980ea.jpg" alt="Dyt. Büşra Yıldırım Erdem" class="profile-img">
+                </div>
+                <div class="about-text fade-in">
+                    <h3>Ben Dyt. Büşra Yıldırım Erdem</h3>
+                    <p>Dyt. Büşra Yıldırım Erdem Beslenme Danışmanlığı Merkezinde, kendi ofisimde, danışan kabulüne başladım.</p>
+                    <p>Hafta içi 09.00 - 18.00 ve Cumartesi 09.00 - 14.00 arası sizlerle olacağım.</p>
+                    <p>Diyetisyen olarak sağlıklı bir yaşam tarzı sürdürebilmek isteyen veya sağlıkla ilgili belirli bir hedefe ulaşmayı amaçlayan insanlara, ihtiyaçlarına göre beslenme programı oluşturuyoruz.</p>
+                    <br>
+                    <p><strong>Hoş geldiniz!</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section" id="services">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Biz Ne Yapıyoruz?</h2>
+                <p>Geniş bir yelpazede profesyonel beslenme danışmanlığı hizmeti sunuyoruz</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon">🥗</div>
+                    <h3>Kişiye Özel Beslenme</h3>
+                    <p>Bireysel ihtiyaçlarınıza göre özel olarak hazırlanan beslenme programları ile sağlıklı yaşama adım atın.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">🏢</div>
+                    <h3>Kurumsal Danışmanlık</h3>
+                    <p>İşyerlerinde çalışan sağlığı için kurumsal beslenme danışmanlığı ve eğitim programları.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">💪</div>
+                    <h3>Sporcu Beslenmesi</h3>
+                    <p>Sporcuların performansını artırmaya yönelik özel beslenme programları ve takviyeleri.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">👶</div>
+                    <h3>Çocuk Beslenmesi</h3>
+                    <p>Çocukların sağlıklı büyümesi için yaş grubuna uygun beslenme planları.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">🤱</div>
+                    <h3>Hamilelik Beslenmesi</h3>
+                    <p>Hamilelik ve emzirme döneminde anne ve bebek sağlığını destekleyen beslenme programları.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">📚</div>
+                    <h3>Beslenme Eğitimi</h3>
+                    <p>Sağlıklı yaşam alışkanlıkları için beslenme eğitimleri ve yaşam koçluğu hizmetleri.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+<section class="section testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-title fade-in">
+      <h2>Diyetisyenlik Sürecimiz</h2>
+      <p>Danışanlarımızla birlikte izlediğimiz adımlar</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-text">
+          <strong>1. İlk Görüşme:</strong> Beslenme alışkanlıklarınız, sağlık durumunuz ve hedefleriniz değerlendirilir. Size özel bir yol haritası çizilir.
+        </div>
+        <div class="testimonial-author">– Başlangıç Noktası</div>
+      </div>
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-text">
+          <strong>2. Vücut Analizi:</strong> Yağ oranı, kas kütlesi, su oranı gibi değerler ölçülür. Bu veriler doğrultusunda bilimsel yaklaşım belirlenir.
+        </div>
+        <div class="testimonial-author">– Bilimsel Değerlendirme</div>
+      </div>
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-text">
+          <strong>3. Kişiye Özel Plan:</strong> Yaşam tarzınıza ve hedeflerinize uygun esnek ve sürdürülebilir bir beslenme planı hazırlanır.
+        </div>
+        <div class="testimonial-author">– Bireysel Uyum</div>
+      </div>
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-text">
+          <strong>4. Haftalık Takip:</strong> Gelişiminiz izlenir, plana göre düzenlemeler yapılır. Sürekli motivasyon ve destek sağlanır.
+        </div>
+        <div class="testimonial-author">– Sürekli Destek</div>
+      </div>
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-text">
+          <strong>5. Sonuç ve Sürdürme:</strong> Hedefe ulaştığınızda, kalıcı sağlıklı yaşam alışkanlıkları kazandırılarak süreç tamamlanır.
+        </div>
+        <div class="testimonial-author">– Sağlıklı Gelecek</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <!-- Contact Section -->
+<section class="section info" id="info">
+  <div class="container">
+    <div class="section-title fade-in">
+      <h2>Beslenme Bilgileri</h2>
+      <p>Sağlıklı bir yaşam için bilmeniz gereken temel besin öğeleri</p>
+    </div>
+    <div class="info-cards fade-in">
+      <div class="info-card">
+        <div class="card-icon">🥩</div>
+        <h4>Protein</h4>
+        <p>Kas onarımı ve hücre yenilenmesi için gereklidir. Günlük ihtiyacınız = vücut ağırlığı × 0.8–1.2 g/kg.</p>
+      </div>
+      <div class="info-card">
+        <div class="card-icon">🍞</div>
+        <h4>Karbonhidrat</h4>
+        <p>Vücudun birincil enerji kaynağıdır. Tam tahıllı, lifli karbonhidratları tercih edin.</p>
+      </div>
+      <div class="info-card">
+        <div class="card-icon">🥑</div>
+        <h4>Yağ</h4>
+        <p>Hormon üretimi ve vitamin emilimi için önemli. Sağlıklı yağlar (zeytinyağı, avokado) tüketin.</p>
+      </div>
+      <div class="info-card">
+        <div class="card-icon">🥦</div>
+        <h4>Lif</h4>
+        <p>Sindirim sistemini düzenler, tokluk hissi sağlar. Sebze-meyve ve baklagillerden alın.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-about">
+      <h3>Dyt. Büşra Akdemir</h3>
+      <p>Sağlıklı yaşam için doğru adres. Kişiye özel beslenme planları ve sürekli destekle yeni, dengeli bir hayata adım atın.</p>
+    </div>
+    <div class="footer-social">
+      <a href="#" title="Facebook" aria-label="Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="#" title="Instagram" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="#" title="Twitter" aria-label="Twitter">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </div>
+    <div class="footer-contact">
+      <p>
+        <i class="fas fa-phone-alt"></i>
+        <a href="tel:+905555555555">+90 555 555 55 55</a>
+      </p>
+      <p>
+        <i class="fas fa-envelope"></i>
+        <a href="mailto:info@dytbusrayildirim.com">info@dytbusrayildirim.com</a>
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 Dyt. Büşra Akdemir. Tüm hakları saklıdır.</p>
+  </div>
+</footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll progress bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simple form validation
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            
+            if (name && phone && email) {
+                alert('Mesajınız başarıyla gönderildi! Size en kısa sürede dönüş yapacağız.');
+                this.reset();
+            } else {
+                alert('Lütfen zorunlu alanları doldurun.');
+            }
+        });
+
+        // Add some interactive effects
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Navbar background change on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(102, 126, 234, 0.98)';
+                navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            } else {
+                navbar.style.background = 'rgba(102, 126, 234, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

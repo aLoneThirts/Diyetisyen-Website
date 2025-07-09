@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hakkımda | Dyt. Büşra Yıldırım Erdem</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+            min-height: 200px;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><radialGradient id="a" cx="50%" cy="0%" r="100%"><stop offset="0%" stop-color="rgba(255,255,255,0.1)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></radialGradient></defs><rect width="100" height="20" fill="url(%23a)"/></svg>') repeat-x;
+            opacity: 0.3;
+        }
+
+       .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled .logo {
+            color: #333;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .navbar.scrolled .nav-menu a {
+            color: #333;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .navbar.scrolled .nav-menu a:hover,
+        .navbar.scrolled .nav-menu a.active {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+        .page-hero {
+            padding: 6rem 2rem 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .page-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.3s forwards;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 4rem 0;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 120px;
+        }
+
+        .profile-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+        }
+
+        .profile-card h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .info-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+        }
+
+        .info-card h4 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .main-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+        }
+
+        .main-content h2 {
+            color: #333;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            position: relative;
+        }
+
+        .main-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        .main-content h3 {
+            color: #667eea;
+            margin: 2rem 0 1rem 0;
+        }
+
+        .main-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .achievement-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .achievement-list li {
+            background: #f8f9fa;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            position: relative;
+        }
+
+        .achievement-list li::before {
+            content: '✓';
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #667eea;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .quote-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+           .footer {
+  background: var(--footer-bg);
+  backdrop-filter: blur(12px);
+  color: var(--footer-text);
+  padding: 4rem 2rem;
+    background: #000 !important;
+  color: #fff;        /* Metni beyaz tutmak için */
+  box-shadow: none;   /* Gölge varsa kaldırmak için */
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+}
+
+.footer-about h3 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.footer-about h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -0.25rem;
+  width: 3rem;
+  height: 0.2rem;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.footer-about p {
+  line-height: 1.6;
+}
+
+.footer-social {
+  display: flex;
+  align-items: center;
+}
+
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-right: 0.75rem;
+  border: 1px solid var(--footer-text);
+  border-radius: 50%;
+  color: var(--footer-text);
+  font-size: 1.1rem;
+  transition: background var(--transition), color var(--transition), transform var(--transition);
+}
+
+.footer-social a:last-child {
+  margin-right: 0;
+}
+
+.footer-social a:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.footer-contact p {
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.footer-contact a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.footer-contact a:hover {
+  color: var(--accent);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 1.5rem;
+  text-align: center;
+}
+
+.footer-bottom p {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .main-content {
+                padding: 2rem;
+            }
+
+            .page-hero {
+                padding: 4rem 1rem 2rem;
+            }
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            z-index: 1001;
+            transition: width 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">Dyt.Büşra Yıldırım Erdem</div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Ana Sayfa</a></li>
+                    <li><a href="about.html">Hakkımda</a></li>
+                    <li><a href="services.html">Hizmetler</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">İletişim</a></li>
+                </ul>
+            </div>
+        </nav>
+        
+        <div class="page-hero">
+            <h1>Hakkımda</h1>
+            <p>Beslenme uzmanı ve yaşam koçu olarak hikayem</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <section class="section">
+        <div class="container">
+            <div class="content-grid">
+                <!-- Sidebar -->
+                <div class="sidebar fade-in">
+                    <div class="profile-card">
+                        <img src="resimler/WhatsApp Görsel 2025-06-27 saat 13.10.42_38efec6e.jpg" alt="Dyt. Büşra Yıldırım Erdem" class="profile-img">
+                        <h3>Dyt. Büşra Yıldırım Erdem</h3>
+                        <p>Beslenme Uzmanı & Yaşam Koçu</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h4>📚 Eğitim</h4>
+                        <p>Beslenme ve Diyetetik Bölümü<br>
+                        İstanbul Üniversitesi</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h4>💼 Deneyim</h4>
+                        <p>8+ yıl profesyonel deneyim<br>
+                        500+ başarılı danışan</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h4>🏆 Uzmanlık</h4>
+                        <p>Kişiye Özel Beslenme<br>
+                        Sporcu Beslenmesi<br>
+                        Hamilelik Beslenmesi</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h4>📍 Lokasyon</h4>
+                        <p>Ümraniye / İstanbul</p>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="main-content fade-in">
+                    <h2>Merhaba, Ben Büşra!</h2>
+                    
+                    <p>Merhaba! Ben Diyetisyen Büşra Yıldırım Erdem. Beslenme ve Diyetetik alanında uzmanlaşmış, sağlıklı yaşam konusunda tutkulu bir profesyonelim. 8 yılı aşkın süredir insanların hayatlarını değiştirmelerine yardımcı oluyorum.</p>
+                    
+                    <p>Beslenme sadece kilo vermek veya almakla ilgili değildir. Doğru beslenme, yaşam kalitenizi artıran, enerjinizi yükselten ve sağlığınızı koruyan bir yaşam tarzıdır. Bu anlayışla her danışanıma yaklaşıyor, onların bireysel ihtiyaçlarına göre özel programlar geliştiriyorum.</p>
+
+                    <div class="quote-box">
+                        "Söz konusu kendiniz olduğunda, değişimin bir parçası olamazsınız. Değişimin kendisi olmalısınız."
+                    </div>
+
+                    <h3>Eğitim ve Kariyer Yolculuğum</h3>
+                    
+                    <p>İstanbul Üniversitesi Sağlık Bilimleri Fakültesi Beslenme ve Diyetetik Bölümü'nden mezun olduktan sonra, alanımda kendimi geliştirmeye devam ettim. Çeşitli hastanelerde ve özel kliniklerde çalıştıktan sonra, kendi merkezimi kurarak daha kişiselleştirilmiş hizmet sunmaya karar verdim.</p>
+
+                    <h3>Yaklaşımım ve Felsefem</h3>
+                    
+                    <p>Her bireyin benzersiz olduğuna inanıyorum. Bu nedenle, danışanlarımla bire bir çalışarak onların yaşam tarzını, alışkanlıklarını ve hedeflerini detaylı bir şekilde analiz ediyorum. Sadece beslenme planı vermekle kalmıyor, aynı zamanda yaşam koçluğu yaparak sürdürülebilir değişimler yaratmalarına yardımcı oluyorum.</p>
+
+                    <h3>Uzmanlık Alanlarım</h3>
+                    
+                    <ul class="achievement-list">
+                        <li><strong>Kişiye Özel Beslenme Programları:</strong> Bireysel ihtiyaç ve hedeflere yönelik özel beslenme planları</li>
+                        <li><strong>Sporcu Beslenmesi:</strong> Performans artışı için spor dalına özel beslenme stratejileri</li>
+                        <li><strong>Hamilelik ve Emzirme Dönemi Beslenmesi:</strong> Anne ve bebek sağlığı için özel programlar</li>
+                        <li><strong>Çocuk Beslenmesi:</strong> Sağlıklı büyüme ve gelişim için yaş grubuna uygun beslenme</li>
+                        <li><strong>Kurumsal Danışmanlık:</strong> İşyerlerinde çalışan sağlığı programları</li>
+                        <li><strong>Beslenme Eğitimleri:</strong> Bilinçli beslenme için grup ve bireysel eğitimler</li>
+                    </ul>
+
+                    <h3>Neden Beslenme Uzmanı Oldum?</h3>
+                    
+                    <p>Beslenme uzmanı olmaya karar vermemin temelinde, insanların yaşam kalitesini artırmaya olan tutkum yatıyor. Üniversite yıllarında gördüğüm beslenme bozukluklarının ne kadar yaygın olduğu ve bunların insanların hayatını nasıl olumsuz etkilediği beni bu alana yönlendirdi.</p>
+                    
+                    <p>Her başarılı danışanımla birlikte, bu mesleği seçtiğim için ne kadar doğru bir karar verdiğimi anlıyorum. Bir kişinin sadece kilosunu değil, hayata bakış açısını, enerjisini ve özgüvenini değiştirmek bana büyük mutluluk veriyor.</p>
+
+                    <h3>Danışanlarımla İlişkim</h3>
+                    
+                    <p>Danışanlarımla sadece profesyonel bir ilişkim yok, aynı zamanda onların motivasyon kaynağı olmaya çalışıyorum. Her biri için ulaşılabilir bir arkadaş, güvenilir bir rehber olmak istiyorum. Çünkü sürdürülebilir değişim ancak güven ve destek ile mümkün oluyor.</p>
+                    
+                    <p>Hafta içi 09:00-18:00 ve Cumartesi 09:00-14:00 saatleri arasında Ümraniye'deki ofisimde sizleri bekliyorum. Sağlıklı yaşama ilk adımınızı birlikte atalım!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-about">
+      <h3>Dyt. Büşra Akdemir</h3>
+      <p>Sağlıklı yaşam için doğru adres. Kişiye özel beslenme planları ve sürekli destekle yeni, dengeli bir hayata adım atın.</p>
+    </div>
+    <div class="footer-social">
+      <a href="#" title="Facebook" aria-label="Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="#" title="Instagram" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="#" title="Twitter" aria-label="Twitter">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </div>
+    <div class="footer-contact">
+      <p>
+        <i class="fas fa-phone-alt"></i>
+        <a href="tel:+905555555555">+90 555 555 55 55</a>
+      </p>
+      <p>
+        <i class="fas fa-envelope"></i>
+        <a href="mailto:info@dytbusrayildirim.com">info@dytbusrayildirim.com</a>
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 Dyt. Büşra Akdemir. Tüm hakları saklıdır.</p>
+  </div>
+</footer>
+
+    <script>
+        // Progress bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // Fade in animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(102, 126, 234, 0.98)';
+                navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            } else {
+                navbar.style.background = 'rgba(102, 126, 234, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
